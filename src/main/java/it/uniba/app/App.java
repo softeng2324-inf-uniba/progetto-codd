@@ -55,6 +55,9 @@ public final class App {
                         Stampe.stampaPartitaGiaInCorso();
                     }
                 }
+                if ("/vuoto".equals(comando)) {
+                    System.out.println(Tavoliere.stampaTabelloneVuoto());
+                }
             }
         }
     }

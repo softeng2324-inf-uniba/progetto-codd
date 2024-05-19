@@ -16,6 +16,7 @@ public final class Stampe {
     public static void stampaComandi() {
         System.out.println("Elenco dei comandi:\n/gioca\n/esci\n/qualimosse\n/abbandona\n/tavoliere\n/vuoto");
     }
+
     /**
      * Metodo che stampa consiglio per iniziare la partita.
      */
