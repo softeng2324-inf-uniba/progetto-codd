@@ -69,6 +69,7 @@ public class Tavoliere {
         str = tav.toString();
         return str;
     }
+
     /**
      * Metodo che costruisce la stringa del tavoliere.
      * @return stringa da stampare
@@ -99,6 +100,5 @@ public class Tavoliere {
         }
         str.append("   a b c d e f g");
         return str.toString();
-        }
+    }
 }
-
