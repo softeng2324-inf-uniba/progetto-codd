@@ -36,4 +36,17 @@ public final class Comandi {
         }
     }
 
+    /**
+     * Metodo che gestisce il comando qualimosse.
+     * @param partitaIniziata booleano che indica se c'è una partita in corso.
+     * @param tav tavoliere.
+     * @param turnoGiocatore indica il giocatore in gioco.
+     */
+    public static void comandoQualiMosse(final boolean partitaIniziata, final Tavoliere tav, final int turnoGiocatore) {
+        if (!partitaIniziata) {
+            Stampe.stampaConsigliaGioca();
+        } else {
+            tav.qualiMosse(turnoGiocatore);
+        }
+    }
 }
