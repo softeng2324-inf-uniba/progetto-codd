@@ -14,6 +14,13 @@ public class Cella {
     Cella() {
         this.idCasella = 0;
     }
+    /**
+     * Metodo Costruttore della classe Cella.
+     * @param id intero da inserire.
+     */
+    public Cella(int id) {
+        this.idCasella = id;
+    }
 
     /**
      * Metodo che permette l'inserimento del valore id in una casella.

@@ -35,6 +35,7 @@ public final class App {
         Set<String> comandiAiuto = Set.of("/help", "-h", "--help");
         boolean loop = true;
         boolean partitaIniziata = false;
+        int turno = 1;
         Tavoliere tav = null;
         Giocatore[] giocatori = new Giocatore[2];
         while (loop) {
@@ -57,6 +58,9 @@ public final class App {
                 }
                 if ("/tavoliere".equals(comando)) {
                     Comandi.comandoTavoliere(partitaIniziata, tav);
+                }
+                if ("/qualimosse".equals(comando)) {
+                    Comandi.comandoQualiMosse(partitaIniziata, tav, turno);
                 }
                 if ("/vuoto".equals(comando)) {
                     System.out.println(Tavoliere.stampaTabelloneVuoto());
