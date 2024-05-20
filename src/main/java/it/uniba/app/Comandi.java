@@ -21,7 +21,15 @@ public final class Comandi {
         }
         return 1;
     }
-
+    /**
+     * Metodo che gestisce il comando /esci.
+     * @return true se il giocatore vuole uscire dall' applicazione.
+     */
+    public static boolean comandoEsci() {
+        Stampe.stampaSicuroDiUscire();
+        String scelta = Tastiera.readString();
+        return !("1".equals(scelta));
+    }
 
     /**
      * Metodo che gestisce il comando /abbandona.

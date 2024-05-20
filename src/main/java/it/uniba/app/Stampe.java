@@ -17,6 +17,12 @@ public final class Stampe {
         System.out.println("Elenco dei comandi:\n/gioca\n/esci\n/qualimosse\n/abbandona\n/tavoliere\n/vuoto");
     }
 
+    /**
+     * Metodo che stampa richiesta di conferma per uscire dall'applicazione.
+     */
+    public static void stampaSicuroDiUscire() {
+        System.out.println("vuoi davvero uscire? Digita 1");
+    }
 
     /**
      * Metodo che stampa richiesta di conferma per abbandonare.
@@ -67,5 +73,8 @@ public final class Stampe {
      */
     public static void stampaInserireComando() {
         System.out.print("inserire comando: ");
+    }
+    public static void stampaErroreComando() {
+        System.out.println("comando non esistente");
     }
 }

@@ -22,4 +22,3 @@ public class Giocatore {
         return this.nome;
     }
 }
-
