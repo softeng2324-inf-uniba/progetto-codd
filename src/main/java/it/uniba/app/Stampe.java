@@ -16,6 +16,31 @@ public final class Stampe {
     public static void stampaComandi() {
         System.out.println("Elenco dei comandi:\n/gioca\n/esci\n/qualimosse\n/abbandona\n/tavoliere\n/vuoto");
     }
+
+
+    /**
+     * Metodo che stampa richiesta di conferma per abbandonare.
+     */
+    public static void stampaSicuroDiAbbandonare() {
+        System.out.println("Sei sicuro di abbandonare la partita? Digita 1");
+    }
+
+    /**
+     * Metodo che stampa errore nell'abbandonare la partita.
+     */
+    public static void stampaErroreAbbandono() {
+        System.out.println("Non c'è nessuna partita in corso");
+    }
+    /**
+     * Metodo che stampa messaggio della partita abbandonata con risultato finale.
+     * @param g Giocatore.
+     * @param pedine numero delle pedine del vincitore.
+     */
+    public static void stampaPartitaAbbandonata(final Giocatore g, final int pedine) {
+        System.out.println("Hai abbandonato");
+        System.out.println(g.getNome() + " ha vinto per " + pedine + " a 0");
+    }
+
     /**
      * Metodo che stampa consiglio per iniziare la partita.
      */

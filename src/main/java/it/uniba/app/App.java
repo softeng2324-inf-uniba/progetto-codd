@@ -56,6 +56,9 @@ public final class App {
                         Stampe.stampaPartitaGiaInCorso();
                     }
                 }
+                if ("/abbandona".equals(comando)) {
+                    partitaIniziata = Comandi.comandoAbbandona(partitaIniziata, tav, giocatori[turno], turno);
+                }
                 if ("/tavoliere".equals(comando)) {
                     Comandi.comandoTavoliere(partitaIniziata, tav);
                 }
