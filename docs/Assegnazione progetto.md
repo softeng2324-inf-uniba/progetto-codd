@@ -1,7 +1,5 @@
 # Assegnazione Progetto
 
-## Ataxx
-
 
 ![Ataxx](./img/oberon.gif)
 
