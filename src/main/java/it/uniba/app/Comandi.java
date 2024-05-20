@@ -24,6 +24,28 @@ public final class Comandi {
 
 
     /**
+     * Metodo che gestisce il comando /abbandona.
+     * @param partitaIniziata booleano che indica se c'è una partita in corso.
+     * @param tav tavoliere.
+     * @param g giocatore in gioco.
+     * @return false se il giocatore finisce la partita.
+     */
+    public static boolean comandoAbbandona(final boolean partitaIniziata,
+                                           final Tavoliere tav, final Giocatore g, final int turnoGiocatore) {
+        if (partitaIniziata) {
+            Stampe.stampaSicuroDiAbbandonare();
+            String scelta = Tastiera.readString();
+            if ("1".equals(scelta)) {
+                Stampe.stampaPartitaAbbandonata(g, tav.contaPedine(altroGiocatore(turnoGiocatore)));
+                return false;
+            }
+        } else {
+            Stampe.stampaErroreAbbandono();
+        }
+        return partitaIniziata;
+    }
+
+    /**
      * Metodo che gestisce il comando Tavoliere.
      * @param partitaIniziata booleano che indica se c'è una partita in corso.
      * @param tav tavoliere.
