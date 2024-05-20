@@ -70,6 +70,7 @@ public class Tavoliere {
         return str;
     }
 
+
     /**
      * Metodo che costruisce la stringa del tavoliere.
      * @return stringa da stampare
@@ -95,6 +96,7 @@ public class Tavoliere {
                     }
                     x++;
                 }
+
             }
             str.append("|").append(i + 1).append("\n");
         }
