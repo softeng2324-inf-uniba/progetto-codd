@@ -12,7 +12,7 @@
    - 9.1 [Sprint 0](#91-sprint-0)
 
 # **1. Introduzione** 
-![Immagine Ataxx](./img/img_ataxx.png)
+![Immagine Ataxx](img/img_ataxx.png)
 
 ### Gruppo **_Codd_**
 Sviluppato dagli studenti: _Bitetti Andrea, Castellano Leoluca, Di Pietro Claudio, Fallucca Giuseppe Pio, Franco Andrea, Gatti Giovanni_.
@@ -60,7 +60,7 @@ Di seguito viene presentato il modello di dominio del gioco _Ataxx_.
 Tale modello è utile per comprendere e comunicare i concetti
 fondamentali di un ambito. E’ indipendente dal software ed è sviluppato mediante un diagramma delle classi con prospettiva concettuale.
 
-![Modello di dominio](./img/modello_dominio.png)
+![Modello di dominio](img/modello_dominio.png)
 
 # **3. Requisiti specifici**
 I requisiti specifici analizzano una particolare caratteristica o funzionalità richiesta per l'applicazione, ed esplicitano 'cosa' l'applicazione deve avere, senza dire 'come' una funzionalità verrà implementata.
@@ -189,23 +189,23 @@ La griglia di gioco è costituita da celle di colore bianco e nero alternato, ta
     - vuoto
     - abbandona
 
-    ![comando_help](./img/comando_help.png)
+    ![comando_help](img/comando_help.png)
 
 - ### **Iniziare una partita**
     Per iniziare la partita, digitare il comando **_/gioca_**. Ora è possibile effettuare le mosse e provare a vincere la partita.
     Quando sullo schermo compare la griglia vuota con le pedine in posizione iniziale, come in figura, si predispone a ricevere la prima mossa di gioco del nero o altri comandi.
 
-    ![comando_gioca](./img/comando_gioca.png)
+    ![comando_gioca](img/comando_gioca.png)
 
 - ### **Visualizzare il tavoliere vuoto con la numerazione**
     Per visualizzare il tavoliere vuoto di 49 caselle quadrate (7 per lato) con le righe numerate da 1 a 7 e le colonne numerate da ‘a’ a ‘g’, digitare il comando **_/vuoto_**.
 
-    ![comando_vuoto](./img/comando_vuoto.png)
+    ![comando_vuoto](img/comando_vuoto.png)
 
 - ### **Visualizzare il tavoliere con le pedine e la numerazione**
     Digitando il comando **_/tavoliere_** sarà possibile, se il gioco è iniziato, visualizzare la posizione di tutte le pedine sul tavoliere (come in figura).
 
-    ![comando_tavoliere](./img/comando_tavoliere.png)
+    ![comando_tavoliere](img/comando_tavoliere.png)
 
 - ### **Visualizzare le mosse possibili di una pedina**
     Se il gioco è iniziato, digitando il comando **_/qualimosse_**, è possibile vedere quali mosse sono disponibili per il giocatore di turno.
@@ -215,7 +215,7 @@ La griglia di gioco è costituita da celle di colore bianco e nero alternato, ta
     2. in arancione mosse che consentono un salto
     3. in viola le caselle raggiungibili con mosse di tipo 1. o 2.
 
-    ![comando_qualimosse](./img/comando_qualimosse.png)
+    ![comando_qualimosse](img/comando_qualimosse.png)
 
 - ### **Vincere una partita**
     La vittoria della partita è possibile in due distinti casi:
@@ -230,7 +230,7 @@ La griglia di gioco è costituita da celle di colore bianco e nero alternato, ta
 
     Se la conferma è negativa, l'app si predispone a ricevere nuovi tentativi o comandi.
 
-    ![comando_abbandona](./img/comando_abbandona.png)
+    ![comando_abbandona](img/comando_abbandona.png)
 
 - ### **Uscire da una partita**
     Qualora si volesse abbandonare una partita, digitare il comando **_/abbandona_**.
@@ -240,7 +240,7 @@ La griglia di gioco è costituita da celle di colore bianco e nero alternato, ta
 
     Se la conferma è negativa, l'app si predispone a ricevere nuovi tentativi o comandi.
 
-    ![comando_esci](./img/comando_esci.png)
+    ![comando_esci](img/comando_esci.png)
 
 ### Buon divertimento... e che vinca il migliore!
 
@@ -259,4 +259,4 @@ Questo approccio incoraggia i partecipanti a esprimere ciò che li rende felici,
 ## **9.1 Sprint 0**
 Il modello Retrospettiva **_"Arrabbiato, triste, felice"_** dello _Sprint 0_ è il seguente:
 
-![Analisi retrospettiva - Sprint 0](./img/restrospettiva_sprint0.png)
+![Analisi retrospettiva - Sprint 0](img/restrospettiva_sprint0.png)
