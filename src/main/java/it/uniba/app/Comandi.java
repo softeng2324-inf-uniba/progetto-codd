@@ -22,4 +22,18 @@ public final class Comandi {
         return 1;
     }
 
+
+    /**
+     * Metodo che gestisce il comando Tavoliere.
+     * @param partitaIniziata booleano che indica se c'è una partita in corso.
+     * @param tav tavoliere.
+     */
+    public static void comandoTavoliere(final boolean partitaIniziata, final Tavoliere tav) {
+        if (!partitaIniziata) {
+            Stampe.stampaConsigliaGioca();
+        } else {
+            System.out.println(tav.toString());
+        }
+    }
+
 }
