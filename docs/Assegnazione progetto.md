@@ -14,3 +14,4 @@
 - Il vincitore è quello con più pezzi quando tutti i quadrati sono pieni. Può anche finire prima, quando un giocatore ha 0 pezzi o non può più giocare nemmeno nelle 
   mosse future (tuttavia, se un giocatore ha più della metà dei pezzi, e può riempire quelli liberi senza "dare" una cassa libera accessibile al suo avversario , il 
   gioco potrebbe essere terminato in questo momento).
+
