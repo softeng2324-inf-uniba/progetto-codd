@@ -4,7 +4,7 @@ package it.uniba.app;
  * Classe che rappresenta il tavolo da gioco
  */
 
-public class Tavoliere {
+ public class Tavoliere {
     public static final int DIM_TAV = 7;
     public static final int CAS_VUOTA = 0;
     public static final int CAS_PG1 = 1;
