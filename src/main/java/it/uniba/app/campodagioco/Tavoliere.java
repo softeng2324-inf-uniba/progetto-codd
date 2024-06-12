@@ -1,4 +1,5 @@
 package it.uniba.app.campodagioco;
+import it.uniba.app.utilita.Comandi;
 /**
  * <<ENTITY>>.
  * Classe che rappresenta il tavolo da gioco
@@ -92,6 +93,34 @@ package it.uniba.app.campodagioco;
         String str;
         str = tav.toString();
         return str;
+    }
+
+    /**
+     * Metodo che cambia il colore delle pedine conquistare.
+     * @param mosse array con le coordinate della posizione d'arrivo della pedina.
+     * @param turno numero del giocatore in turno.
+     * @return Tavoliere modificato.
+     */
+    public Tavoliere conquistaPedine(final int[] mosse, final int turno) { //inserito
+        final int posCoordinataX = 3;
+        final int posCoordinataY = 2;
+        final int posX = mosse[posCoordinataY];
+        final int posY = mosse[posCoordinataX];
+        for (int x = Math.max(0, posX - 1); x <= Math.min(posX + 1, tavoliere.length - 1); x++) {
+            for (int y = Math.max(0, posY - 1); y <= Math.min(posY + 1, tavoliere[x].length - 1); y++) {
+                if (tavoliere[y][x].getId() == Comandi.altroGiocatore(turno)) {
+                    setIdTav(y, x, turno);
+                    if (turno == 0) {
+                        setPedine(PG1, getPedine(PG1) + 1);
+                        setPedine(PG2, getPedine(PG2) - 1);
+                    } else {
+                        setPedine(PG1, getPedine(PG1) - 1);
+                        setPedine(PG2, getPedine(PG2) + 1);
+                    }
+                }
+            }
+        }
+        return this;
     }
 
     /**
