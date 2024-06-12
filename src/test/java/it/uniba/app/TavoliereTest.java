@@ -3,7 +3,7 @@ package it.uniba.app.testclass;
 import it.uniba.app.campodagioco.Cella;
 import it.uniba.app.campodagioco.Tavoliere;
 import it.uniba.app.utente.Giocatore;
-import org.junit.Before;
+import org.junit.jupiter.Before;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
