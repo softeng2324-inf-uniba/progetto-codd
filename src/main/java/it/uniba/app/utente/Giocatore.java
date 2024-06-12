@@ -48,7 +48,7 @@ public class Giocatore {
         }
         double distanza = Math.sqrt(Math.pow(colonnaArrivo - colonnaPartenza, 2)
             + Math.pow(rigaArrivo - rigaPartenza, 2));
-        final int maxDistance = 2; //incrementa a 3 per salto
+        final int maxDistance = 3;
         return !(distanza >= maxDistance) && tav.getIdTav(rigaArrivo, colonnaArrivo) == Tavoliere.CAS_VUOTA;
     }
 
@@ -72,11 +72,12 @@ public class Giocatore {
             } else {
                 tav.setPedine(Tavoliere.PG2, tav.getPedine(Tavoliere.PG2) + 1);
             }
-        } //aggiungi salto
+        }  else {
+            tav.setIdTav(mossa[1], mossa[0], Tavoliere.CAS_VUOTA);
+            tav.setIdTav(mossa[coordinataArrivoY], mossa[coordinataArrivoX], giocatore);
+        }
         return tav;
     }
-
-
 
 
 }
