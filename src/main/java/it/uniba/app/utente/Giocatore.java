@@ -72,7 +72,7 @@ public class Giocatore {
             } else {
                 tav.setPedine(Tavoliere.PG2, tav.getPedine(Tavoliere.PG2) + 1);
             }
-        }  else {
+        } else {
             tav.setIdTav(mossa[1], mossa[0], Tavoliere.CAS_VUOTA);
             tav.setIdTav(mossa[coordinataArrivoY], mossa[coordinataArrivoX], giocatore);
         }

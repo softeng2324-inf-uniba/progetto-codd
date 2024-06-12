@@ -63,11 +63,14 @@ public final class Comandi {
      * @param partitaIniziata booleano che indica se c'è una partita in corso.
      * @param tav tavoliere.
      */
-    public static void comandoTavoliere(final boolean partitaIniziata, final Tavoliere tav) {
+    public static void comandoTavoliere(final boolean partitaIniziata,
+            final Tavoliere tav, final Giocatore[] giocatori) {
         if (!partitaIniziata) {
             Stampe.stampaConsigliaGioca();
         } else {
             System.out.println(tav.toString());
+            System.out.println("⚫ " + giocatori[0].getNome() + ": " + tav.getPedine(0)
+                + "\n⚪ " + giocatori[1].getNome() + ": " + tav.getPedine(1));
         }
     }
 

@@ -1,6 +1,7 @@
 package it.uniba.app.utilita;
 import java.util.Scanner;
 
+import it.uniba.app.campodagioco.Tavoliere;
 
 import java.nio.charset.StandardCharsets;
 
@@ -30,6 +31,55 @@ public final class Tastiera {
         }
     }
 
+    /**
+     * Metodo che controlla se il comando inserito per bloccare la casella è valido.
+     * @param stringa input del giocatore.
+     * @return true se il comando è corretto.
+     */
+    public static boolean bloccoValido(final String stringa) {
+        final int lunghezzaStringa = 10;
+        final int baseCaratteri = 36;
+        final int convertiInNumero = 10;
+        final int coordinataCorretta = 3;
+        if (stringa.length() != lunghezzaStringa) {
+            return false;
+        }
+        //--------------------------------------------
+        // Compara prima parte del comando.
+        String compara = "/blocca ";
+        int i = 0;
+        while (i < compara.length()) {
+            if (compara.charAt(i) != stringa.charAt(i)) {
+                return false;
+            }
+            i++;
+        }
+        //--------------------------------------------
+        // Controlla se le coordinate sono corrette.
+        int primaCoordinata = Character.digit(stringa.charAt(i), baseCaratteri) - convertiInNumero;
+        int secondaCoordinata = Character.getNumericValue(stringa.charAt(i + 1)) - 1;
+        if (primaCoordinata > Tavoliere.DIM_TAV || secondaCoordinata > Tavoliere.DIM_TAV
+            || primaCoordinata < 0 || secondaCoordinata < 0) {
+                return false;
+            }
+        return primaCoordinata == coordinataCorretta || secondaCoordinata == coordinataCorretta;
+    }
+
+    /**
+     * Metodo che prende dalla stringa la coordinata inserita salvandola nell'array.
+     * @param stringa input del giocatore.
+     * @return array contenente le coordinate.
+     */
+    public static int[] salvaCoordinateBlocco(final String stringa) {
+        final int baseCaratteri = 36;
+        final int convertiInNumero = 10;
+        final int lettera = 8;
+        final int numero = 9;
+        int[] coordinate = new int[2];
+        coordinate[0] = Character.digit(stringa.charAt(lettera), baseCaratteri) - convertiInNumero;
+        coordinate[1] = Character.getNumericValue(stringa.charAt(numero)) - 1;
+        return coordinate;
+    }
 
     /**
      * Metodo che controlla se la stringa inserita è corretta.

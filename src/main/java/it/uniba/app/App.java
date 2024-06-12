@@ -11,6 +11,7 @@ import java.util.Set;
 
 
 
+
 /**
  * Classe main dell'app.
  */
@@ -66,7 +67,7 @@ public final class App {
         Cronometro cronometro = null;
         while (loop) {
             if (partitaIniziata && tav != null) {
-                Stampe.stampaTurno(giocatori, turno);
+                //Se un giocatore non ha mosse disponibili, passa il turno all'avversario
                 if (!Tavoliere.presenzaMosseDisponibili(tav, turno) && !tav.finePartita()) {
                     turno = Comandi.altroGiocatore(turno);
                     Stampe.stampaPassaggioTurno();
@@ -83,8 +84,11 @@ public final class App {
                     turno = 0;
                     listaMosse = new ArrayList<>();
                 }
-            }
+                if (partitaIniziata) {
+                    Stampe.stampaTurno(giocatori, turno);
+                }
 
+            }
             //lettura comando
             Stampe.stampaInserireComando();
             String comando = Tastiera.readString();
@@ -126,7 +130,7 @@ public final class App {
                     }
                 }
                 if ("/tavoliere".equals(comando)) {
-                    Comandi.comandoTavoliere(partitaIniziata, tav);
+                    Comandi.comandoTavoliere(partitaIniziata, tav, giocatori);
                 }
                 if ("/qualimosse".equals(comando)) {
                     Comandi.comandoQualiMosse(partitaIniziata, tav, turno);
@@ -143,6 +147,12 @@ public final class App {
                         Stampe.stampaConsigliaGioca();
                     }
                 }
+                // Comando blocca.
+                if (!partitaIniziata && Tastiera.bloccoValido(comando) && tav != null) {
+                    int[] coordinata = Tastiera.salvaCoordinateBlocco(comando);
+                    tav = tav.bloccaCasella(tav, coordinata);
+                    Comandi.comandoTavoliere(true, tav, giocatori);
+                }
                 // Comando movimento.
                 if (partitaIniziata && Tastiera.inputValido(comando, partitaIniziata)) {
                     int[] mosse = Tastiera.separaInput(comando);
@@ -151,12 +161,12 @@ public final class App {
                         tav = giocatori[turno].mossaGiocatore(tav, mosse, turno);
                         tav = tav.conquistaPedine(mosse, turno);
                         turno = Comandi.altroGiocatore(turno);
-                        Comandi.comandoTavoliere(partitaIniziata, tav);
+                        Comandi.comandoTavoliere(partitaIniziata, tav, giocatori);
                     }
                 }
                 //controllo comandi errati.
                 if (!comandi.contains(comando) && !comandiAiuto.contains(comando)
-                    && !Tastiera.inputValido(comando, partitaIniziata)) {
+                    && !Tastiera.inputValido(comando, partitaIniziata) && !Tastiera.bloccoValido(comando)) {
                     Stampe.stampaErroreComando();
                 }
             }

@@ -38,7 +38,40 @@ public final class Stampe {
     public static void stampaConsigliaAiuto() {
         System.out.println("digita \u001B[1m/help\u001B[0m");
     }
+    /**
+     * Metodo che stampa il messaggio del passaggio del turno all'avversario per mancanza di mosse disponibili.
+     */
+    public static void stampaPassaggioTurno() {
+        System.out.println("Il giocatore non ha mosse possibili, il turno passa all'avversario");
+    }
 
+    /**
+     * Metodo che stampa la durata della partita.
+     */
+    public static void stampaTempoTrascorso(final String elapsedTime) {
+        System.out.println("Tempo trascorso: " + elapsedTime);
+    }
+
+    /**
+     * Metodo che stampa avviso di casella già bloccata.
+     */
+    public static void stampaErroreBlocco() {
+        System.out.println("Casella già bloccata");
+    }
+
+    /**
+     * Metodo che stampa messaggio quando la partita è finita in pareggio.
+     */
+    public static void stampaPartitaPareggiata(final Tavoliere tav) {
+        int pedine = tav.getPedine(0);
+        System.out.println("La partita è finita in pareggio: " + pedine + " a " + pedine);
+    }
+    /**
+     * Metodo che stampa avviso raggiungimento massimo di caselle bloccate.
+     */
+    public static void stampaLimiteBlocco() {
+        System.out.println("Limite caselle bloccate raggiunto");
+    }
     /**
      * Metodo che stampa richiesta di conferma per uscire dall'applicazione.
      */
@@ -52,26 +85,7 @@ public final class Stampe {
     public static void stampaSicuroDiAbbandonare() {
         System.out.println("Sei sicuro di abbandonare la partita? Digita 1");
     }
-    /**
-     * Metodo che stampa il messaggio del passaggio del turno all'avversario per mancanza di mosse disponibili.
-     */
-    public static void stampaPassaggioTurno() {
-        System.out.println("Il giocatore non ha mosse possibili, il turno passa all'avversario");
-    }
-    /**
-     * Metodo che stampa la durata della partita.
-     */
-    public static void stampaTempoTrascorso(final String elapsedTime) {
-        System.out.println("Tempo trascorso: " + elapsedTime);
-    }
 
-    /**
-     * Metodo che stampa messaggio quando la partita è finita in pareggio.
-     */
-    public static void stampaPartitaPareggiata(final Tavoliere tav) {
-        int pedine = tav.getPedine(0);
-        System.out.println("La partita è finita in pareggio: " + pedine + " a " + pedine);
-    }
     /**
      * Metodo che stampa messaggio se il giocatore decide di non abbandonare.
      */
@@ -139,6 +153,7 @@ public final class Stampe {
     public static void stampaErroreComando() {
         System.out.println("comando non accettato");
     }
+
     /**
      * Metodo che stampa il messaggio alla fine della partita.
      * @param g Array di giocatori.

@@ -1,7 +1,8 @@
 package it.uniba.app.campodagioco;
-import java.util.List;
 import it.uniba.app.utente.Giocatore;
 import it.uniba.app.utilita.Comandi;
+import it.uniba.app.utilita.Stampe;
+import java.util.List;
 /**
  * <<ENTITY>>.
  * Classe che rappresenta il tavolo da gioco
@@ -15,10 +16,12 @@ import it.uniba.app.utilita.Comandi;
     public static final int CAS_GIAL = 3;
     public static final int CAS_ARAN = 4;
     public static final int CAS_ROSA = 5;
+    public static final int CAS_BLOCCO = 6;
 
     private Cella[][] tavoliere;
     private static int numMossa = 1;
     private int[] pedine;
+    private int casBloccate;
 
     /**
      * Costruttore di Tavoliere.
@@ -30,6 +33,7 @@ import it.uniba.app.utilita.Comandi;
                 tavoliere[i][j] = new Cella();
             }
         }
+        casBloccate = 0;
         pedine = new int[2];
     }
 
@@ -41,7 +45,7 @@ import it.uniba.app.utilita.Comandi;
         if (pedine[PG1] == 0 || pedine[PG2] == 0) {
             return true;
         }
-        return getPedine(PG1) + getPedine(PG2) == DIM_TAV * DIM_TAV;
+        return getPedine(PG1) + getPedine(PG2) == DIM_TAV * DIM_TAV - casBloccate;
     }
 
     /**
@@ -140,7 +144,7 @@ import it.uniba.app.utilita.Comandi;
         numMossa++;
         listaMosse.add(stringaComposta);
     }
-    
+
     /**
      * Metodo che cambia il colore delle pedine conquistare.
      * @param mosse array con le coordinate della posizione d'arrivo della pedina.
@@ -168,7 +172,6 @@ import it.uniba.app.utilita.Comandi;
         }
         return this;
     }
-
     /**
      * Metodo che stampa a video il tabellone con le mosse possibili del giocatore "g".
      * @param g intero che rappresenta la pedina del giocatore
@@ -283,6 +286,26 @@ import it.uniba.app.utilita.Comandi;
     }
 
     /**
+     * Metodo che blocca la casella selezionata.
+     * @param tav tavoliere.
+     * @param coordinate coordinate della casella da bloccare.
+     * @return tavoliere modificato.
+     */
+    public Tavoliere bloccaCasella(final Tavoliere tav, final int[] coordinate) {
+        final int maxCaselleBloccate = 9;
+        if (casBloccate < maxCaselleBloccate) {
+            if (tav.tavoliere[coordinate[1]][coordinate[0]].getId() != CAS_BLOCCO) {
+                tav.tavoliere[coordinate[1]][coordinate[0]].setId(CAS_BLOCCO);
+                casBloccate++;
+            } else {
+                Stampe.stampaErroreBlocco();
+            }
+        } else {
+            Stampe.stampaLimiteBlocco();
+        }
+        return tav;
+    }
+    /**
      * Metodo che costruisce la stringa del tavoliere.
      * @return stringa da stampare
      */
@@ -314,6 +337,9 @@ import it.uniba.app.utilita.Comandi;
                     x++;
                 } else if (tavoliere[i][j].getId() == CAS_ROSA) {
                     str.append("\u001B[38;5;205m▓▓\u001B[0m");
+                    x++;
+                } else if (tavoliere[i][j].getId() == CAS_BLOCCO) {
+                    str.append("▓▓");
                     x++;
                 }
 
@@ -357,6 +383,9 @@ import it.uniba.app.utilita.Comandi;
                     x++;
                 } else if (tav[i][j].getId() == CAS_ROSA) {
                     str.append("\u001B[38;5;205m▓▓\u001B[0m");
+                    x++;
+                } else if (tavoliere[i][j].getId() == CAS_BLOCCO) {
+                    str.append("▓▓");
                     x++;
                 }
 
