@@ -4,6 +4,8 @@ import it.uniba.app.utilita.Comandi;
 import it.uniba.app.utilita.Stampe;
 import it.uniba.app.utilita.Tastiera;
 import it.uniba.app.campodagioco.Tavoliere;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -59,7 +61,7 @@ public final class App {
         int turno = 0;
         Tavoliere tav = new Tavoliere();
         Giocatore[] giocatori = new Giocatore[2];
-
+        List<String> listaMosse = new ArrayList<>();
         while (loop) {
             if (partitaIniziata && tav != null) {
                 Stampe.stampaTurno(giocatori, turno);
@@ -91,6 +93,7 @@ public final class App {
                     if (!partitaIniziata) {
                         tav = new Tavoliere();
                         turno = 0;
+                        listaMosse = new ArrayList<>();
                     }
                 }
                 if ("/tavoliere".equals(comando)) {
@@ -102,10 +105,20 @@ public final class App {
                 if ("/vuoto".equals(comando)) {
                     System.out.println(Tavoliere.stampaTabelloneVuoto());
                 }
+                if ("/mosse".equals(comando)) {
+                    if (partitaIniziata) {
+                        for (String mossa : listaMosse) {
+                            System.out.print(mossa);
+                        }
+                    } else {
+                        Stampe.stampaConsigliaGioca();
+                    }
+                }
                 // Comando movimento.
                 if (partitaIniziata && Tastiera.inputValido(comando, partitaIniziata)) {
                     int[] mosse = Tastiera.separaInput(comando);
                     if (tav != null  && giocatori[turno].controllaMossa(tav, mosse, turno)) {
+                        Tavoliere.collezionaMosse(listaMosse, comando, turno, giocatori);
                         tav = giocatori[turno].mossaGiocatore(tav, mosse, turno);
                         tav = tav.conquistaPedine(mosse, turno);
                         turno = Comandi.altroGiocatore(turno);

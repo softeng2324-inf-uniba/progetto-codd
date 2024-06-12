@@ -1,4 +1,6 @@
 package it.uniba.app.campodagioco;
+import java.util.List;
+import it.uniba.app.utente.Giocatore;
 import it.uniba.app.utilita.Comandi;
 /**
  * <<ENTITY>>.
@@ -15,6 +17,7 @@ import it.uniba.app.utilita.Comandi;
     public static final int CAS_ROSA = 5;
 
     private Cella[][] tavoliere;
+    private static int numMossa = 1;
     private int[] pedine;
 
     /**
@@ -95,6 +98,31 @@ import it.uniba.app.utilita.Comandi;
         return str;
     }
 
+    /**
+     * Metodo che salva le mosse effettuate all'interno di una lista di stringhe.
+     * @param listaMosse lista.
+     * @param stringa stringa da memorizzare.
+     * @param giocatore numero del giocatore che effettua la mossa.
+     * @param giocatori array di giocatori.
+     */
+    public static void collezionaMosse(final List<String> listaMosse,
+            final String stringa, final int giocatore, final Giocatore[] giocatori) {
+        String stringaComposta = "";
+        if (giocatore == 0) {
+            stringaComposta += numMossa + ". " + stringa
+                + " (" + "\u001B[94m" + giocatori[giocatore].getNome() + "\u001B[0m); ";
+        } else {
+            if (!listaMosse.isEmpty()) {
+                stringaComposta = listaMosse.get(listaMosse.size() - 1);
+                listaMosse.remove(listaMosse.size() - 1);
+            }
+            stringaComposta += numMossa + ". " + stringa
+            + " (\u001B[94m" + giocatori[giocatore].getNome() + "\u001B[0m);\n";
+        }
+        numMossa++;
+        listaMosse.add(stringaComposta);
+    }
+    
     /**
      * Metodo che cambia il colore delle pedine conquistare.
      * @param mosse array con le coordinate della posizione d'arrivo della pedina.
