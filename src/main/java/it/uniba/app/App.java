@@ -1,5 +1,12 @@
 package it.uniba.app;
+import it.uniba.app.utente.Giocatore;
+import it.uniba.app.utilita.Comandi;
+import it.uniba.app.utilita.Stampe;
+import it.uniba.app.utilita.Tastiera;
+import it.uniba.app.campodagioco.Tavoliere;
 import java.util.Set;
+
+
 
 /**
  * Classe main dell'app.
@@ -11,7 +18,16 @@ public final class App {
      * @return "Benvenuto in Ataxx"
      */
     public String getGreeting() {
-        return "\u001B[38;5;201m\u001B[1mBenvenuto in Ataxx\u001B[0m";
+        return
+                """
+                        \033[38;5;208m\
+                        ░█████╗░ ████████╗ ░█████╗░ ██╗░░██╗ ██╗░░██╗
+                        ██╔══██╗ ╚══██╔══╝ ██╔══██╗ ╚██╗██╔╝ ╚██╗██╔╝
+                        ███████║ ░░░██║░░░ ███████║ ░╚███╔╝░ ░╚███╔╝░
+                        ██╔══██║ ░░░██║░░░ ██╔══██║ ░██╔██╗░ ░██╔██╗░
+                        ██║░░██║ ░░░██║░░░ ██║░░██║ ██╔╝╚██╗ ██╔╝╚██╗
+                        ╚═╝░░╚═╝ ░░░╚═╝░░░ ╚═╝░░╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚═╝\u001B[0m
+                        """;
     }
     /**
      * Metodo che permette all'utente di inserire il nome giocatore.
@@ -19,8 +35,11 @@ public final class App {
      * @return Giocatore con nome impostato.
      */
     public static Giocatore setNome(final int g) {
-        Stampe.stampaRichiestaInserimentoNome(g);
-        String nomeGiocatore = Tastiera.readString();
+        String nomeGiocatore;
+        do {
+            Stampe.stampaRichiestaInserimentoNome(g);
+            nomeGiocatore = Tastiera.readString();
+        } while (nomeGiocatore.length() == 0);
         return new Giocatore(nomeGiocatore);
     }
 
@@ -31,15 +50,21 @@ public final class App {
      */
     public static void main(final String[] args) {
         System.out.println(new App().getGreeting());
-        System.out.println("digita \u001B[1m/help\u001B[0m");
+        Stampe.stampaConsigliaAiuto();
         Set<String> comandiAiuto = Set.of("/help", "-h", "--help");
-        Set<String> comandi = Set.of("/esci","/gioca","/abbandona","/tavoliere","/qualimosse","/vuoto");
+        Set<String> comandi = Set.of("/esci", "/gioca", "/abbandona",
+            "/tavoliere", "/qualimosse", "/vuoto", "/mosse", "/tempo");
         boolean loop = true;
         boolean partitaIniziata = false;
-        int turno = 1;
-        Tavoliere tav = null;
+        int turno = 0;
+        Tavoliere tav = new Tavoliere();
         Giocatore[] giocatori = new Giocatore[2];
+
         while (loop) {
+            if (partitaIniziata && tav != null) {
+                Stampe.stampaTurno(giocatori, turno);
+            }
+            //lettura comando
             Stampe.stampaInserireComando();
             String comando = Tastiera.readString();
             if (comando != null) {
@@ -49,9 +74,9 @@ public final class App {
                 if ("/esci".equals(comando)) {
                     loop = Comandi.comandoEsci();
                 }
-                if ("/gioca".equals(comando)) {
+                if ("/gioca".equals(comando) && tav != null) {
                     if (!partitaIniziata) {
-                        tav = Tavoliere.inizializzaTavoliere(new Tavoliere());
+                        Tavoliere.inizializzaTavoliere(tav);
                         giocatori[0] = setNome(1);
                         giocatori[1] = setNome(2);
                         System.out.println(tav);
@@ -61,7 +86,12 @@ public final class App {
                     }
                 }
                 if ("/abbandona".equals(comando)) {
-                    partitaIniziata = Comandi.comandoAbbandona(partitaIniziata, tav, giocatori[turno], turno);
+                    partitaIniziata = Comandi.comandoAbbandona(
+                            partitaIniziata, tav, giocatori[Comandi.altroGiocatore(turno)], turno);
+                    if (!partitaIniziata) {
+                        tav = new Tavoliere();
+                        turno = 0;
+                    }
                 }
                 if ("/tavoliere".equals(comando)) {
                     Comandi.comandoTavoliere(partitaIniziata, tav);
@@ -72,7 +102,19 @@ public final class App {
                 if ("/vuoto".equals(comando)) {
                     System.out.println(Tavoliere.stampaTabelloneVuoto());
                 }
-                if (!comandi.contains(comando) && !comandiAiuto.contains(comando)){
+                // Comando movimento.
+                if (partitaIniziata && Tastiera.inputValido(comando, partitaIniziata)) {
+                    int[] mosse = Tastiera.separaInput(comando);
+                    if (tav != null  && giocatori[turno].controllaMossa(tav, mosse, turno)) {
+                        tav = giocatori[turno].mossaGiocatore(tav, mosse, turno);
+                        //conquista pedine
+                        turno = Comandi.altroGiocatore(turno);
+                        Comandi.comandoTavoliere(partitaIniziata, tav);
+                    }
+                }
+                //controllo comandi errati.
+                if (!comandi.contains(comando) && !comandiAiuto.contains(comando)
+                    && !Tastiera.inputValido(comando, partitaIniziata)) {
                     Stampe.stampaErroreComando();
                 }
             }
