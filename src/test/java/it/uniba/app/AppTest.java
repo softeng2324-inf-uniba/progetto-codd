@@ -1,20 +1,31 @@
-package it.uniba.app;
+package it.uniba.app.testclass;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+
+import it.uniba.app.App;
+
 /**
- * Main test class of the application.
+ * Test della classe App.
  */
 class AppTest {
     /**
-     * Test the getGreeting method of the App class.
+     * Test del metodo getGreeting.
      */
     @Test
-    void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(
-                classUnderTest.getGreeting(), "app should have a greeting");
+    public void testGetGreeting() {
+        App app = new App();
+        String expectedGreeting = """
+                \033[38;5;208m\
+                ░█████╗░ ████████╗ ░█████╗░ ██╗░░██╗ ██╗░░██╗
+                ██╔══██╗ ╚══██╔══╝ ██╔══██╗ ╚██╗██╔╝ ╚██╗██╔╝
+                ███████║ ░░░██║░░░ ███████║ ░╚███╔╝░ ░╚███╔╝░
+                ██╔══██║ ░░░██║░░░ ██╔══██║ ░██╔██╗░ ░██╔██╗░
+                ██║░░██║ ░░░██║░░░ ██║░░██║ ██╔╝╚██╗ ██╔╝╚██╗
+                ╚═╝░░╚═╝ ░░░╚═╝░░░ ╚═╝░░╚═╝ ╚═╝░░╚═╝ ╚═╝░░╚═╝\u001B[0m
+                """;
+
+        assertEquals(expectedGreeting, app.getGreeting());
     }
 }
