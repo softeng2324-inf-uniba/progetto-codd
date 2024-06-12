@@ -59,6 +59,13 @@ public final class Stampe {
         System.out.println("Il giocatore non ha mosse possibili, il turno passa all'avversario");
     }
     /**
+     * Metodo che stampa la durata della partita.
+     */
+    public static void stampaTempoTrascorso(final String elapsedTime) {
+        System.out.println("Tempo trascorso: " + elapsedTime);
+    }
+
+    /**
      * Metodo che stampa messaggio quando la partita è finita in pareggio.
      */
     public static void stampaPartitaPareggiata(final Tavoliere tav) {

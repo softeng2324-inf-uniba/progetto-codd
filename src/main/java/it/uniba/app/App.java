@@ -1,6 +1,7 @@
 package it.uniba.app;
 import it.uniba.app.utente.Giocatore;
 import it.uniba.app.utilita.Comandi;
+import it.uniba.app.utilita.Cronometro;
 import it.uniba.app.utilita.Stampe;
 import it.uniba.app.utilita.Tastiera;
 import it.uniba.app.campodagioco.Tavoliere;
@@ -62,6 +63,7 @@ public final class App {
         Tavoliere tav = new Tavoliere();
         Giocatore[] giocatori = new Giocatore[2];
         List<String> listaMosse = new ArrayList<>();
+        Cronometro cronometro = null;
         while (loop) {
             if (partitaIniziata && tav != null) {
                 Stampe.stampaTurno(giocatori, turno);
@@ -100,8 +102,18 @@ public final class App {
                         giocatori[1] = setNome(2);
                         System.out.println(tav);
                         partitaIniziata = true;
+                        cronometro = new Cronometro();
+                        cronometro.avvioCronometro();
                     } else {
                         Stampe.stampaPartitaGiaInCorso();
+                    }
+                }
+                if ("/tempo".equals(comando)) {
+                    if (partitaIniziata && cronometro != null) {
+                        String elapsedTime = cronometro.getTempo();
+                        Stampe.stampaTempoTrascorso(elapsedTime);
+                    } else {
+                        Stampe.stampaConsigliaGioca();
                     }
                 }
                 if ("/abbandona".equals(comando)) {
