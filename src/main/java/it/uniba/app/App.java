@@ -7,7 +7,6 @@ import it.uniba.app.campodagioco.Tavoliere;
 import java.util.Set;
 
 
-
 /**
  * Classe main dell'app.
  */
