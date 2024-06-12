@@ -69,8 +69,6 @@ public final class Comandi {
             Stampe.stampaConsigliaGioca();
         } else {
             System.out.println(tav.toString());
-            System.out.println("⚫ " + giocatori[0].getNome() + ": " + tav.getPedine(0)
-                + "\n⚪ " + giocatori[1].getNome() + ": " + tav.getPedine(1));
         }
     }
 
