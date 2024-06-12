@@ -2,7 +2,7 @@ package it.uniba.app.testclass;
 
 import it.uniba.app.campodagioco.Cella;
 import it.uniba.app.campodagioco.Tavoliere;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 /**
