@@ -65,7 +65,13 @@ public final class App {
         while (loop) {
             if (partitaIniziata && tav != null) {
                 Stampe.stampaTurno(giocatori, turno);
+                if (!Tavoliere.presenzaMosseDisponibili(tav, turno)) {
+                    turno = Comandi.altroGiocatore(turno);
+                    Stampe.stampaPassaggioTurno();
+                    continue;
+                }
             }
+
             //lettura comando
             Stampe.stampaInserireComando();
             String comando = Tastiera.readString();

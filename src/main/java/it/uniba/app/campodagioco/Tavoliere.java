@@ -223,6 +223,46 @@ import it.uniba.app.utilita.Comandi;
         return copia;
     }
 
+    /**
+     * Metodo che controlla se il giocatore può effettuare mosse.
+     *
+     * @param tav   il tavoliere
+     * @param turno numero del giocatore in turno
+     * @return true se il giocatore ha mosse disponibili, false altrimenti
+     */
+    public static boolean presenzaMosseDisponibili(final Tavoliere tav, final int turno) {
+        for (int i = 0; i < DIM_TAV; i++) {
+            for (int j = 0; j < DIM_TAV; j++) {
+                if (tav.getIdTav(i, j) == turno) {
+                    if (haMosseDisponibili(tav, i, j)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Metodo che controlla se ci sono mosse disponibili intorno ad una specifica posizione.
+     *
+     * @param tav il tavoliere
+     * @param i   la riga della posizione
+     * @param j   la colonna della posizione
+     * @return true se ci sono mosse disponibili, false altrimenti
+     */
+    private static boolean haMosseDisponibili(final Tavoliere tav, final int i, final int j) {
+        final int maxRange = 3;
+
+        for (int x = Math.max(0, i - 2); x < Math.min(i + maxRange, DIM_TAV); x++) {
+            for (int y = Math.max(0, j - 2); y < Math.min(j + maxRange, DIM_TAV); y++) {
+                if (tav.getIdTav(x, y) == CAS_VUOTA) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Metodo che costruisce la stringa del tavoliere.

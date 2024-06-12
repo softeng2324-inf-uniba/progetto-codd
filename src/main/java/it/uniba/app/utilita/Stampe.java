@@ -51,7 +51,12 @@ public final class Stampe {
     public static void stampaSicuroDiAbbandonare() {
         System.out.println("Sei sicuro di abbandonare la partita? Digita 1");
     }
-
+    /**
+     * Metodo che stampa il messaggio del passaggio del turno all'avversario per mancanza di mosse disponibili.
+     */
+    public static void stampaPassaggioTurno() {
+        System.out.println("Il giocatore non ha mosse possibili, il turno passa all'avversario");
+    }
     /**
      * Metodo che stampa messaggio se il giocatore decide di non abbandonare.
      */
