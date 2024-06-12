@@ -65,10 +65,21 @@ public final class App {
         while (loop) {
             if (partitaIniziata && tav != null) {
                 Stampe.stampaTurno(giocatori, turno);
-                if (!Tavoliere.presenzaMosseDisponibili(tav, turno)) {
+                if (!Tavoliere.presenzaMosseDisponibili(tav, turno) && !tav.finePartita()) {
                     turno = Comandi.altroGiocatore(turno);
                     Stampe.stampaPassaggioTurno();
                     continue;
+                }
+                if (tav.finePartita()) { //gestisce la fine di una partita
+                    if (tav.partitaPareggiata()) {
+                        Stampe.stampaPartitaPareggiata(tav);
+                    } else {
+                        Stampe.stampaFinePartita(giocatori, tav);
+                    }
+                    partitaIniziata = false;
+                    tav = new Tavoliere();
+                    turno = 0;
+                    listaMosse = new ArrayList<>();
                 }
             }
 

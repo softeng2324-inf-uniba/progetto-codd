@@ -33,6 +33,16 @@ import it.uniba.app.utilita.Comandi;
         pedine = new int[2];
     }
 
+    /**
+     * Metodo che gestisce la fine della partita.
+     * @return vero se la partita è finita
+     */
+    public boolean finePartita() {
+        if (pedine[PG1] == 0 || pedine[PG2] == 0) {
+            return true;
+        }
+        return getPedine(PG1) + getPedine(PG2) == DIM_TAV * DIM_TAV;
+    }
 
     /**
      * Metodo d'accesso per l'array delle pedine.
@@ -64,6 +74,14 @@ import it.uniba.app.utilita.Comandi;
         tav.tavoliere[DIM_TAV - 1][DIM_TAV - 1].setId(PG1);
         tav.setPedine(PG1, tav.getPedine(PG1) + 2);
         tav.setPedine(PG2, tav.getPedine(PG2) + 2);
+    }
+
+    /**
+     * Metodo che controlla a fine partita se la partita è finita in pareggio.
+     * @return true se ci sono lo stesso numero di pedine.
+     */
+    public boolean partitaPareggiata() {
+        return pedine[PG1] == pedine[PG2];
     }
 
     /**

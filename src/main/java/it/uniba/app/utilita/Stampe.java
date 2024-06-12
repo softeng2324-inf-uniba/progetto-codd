@@ -1,4 +1,5 @@
 package it.uniba.app.utilita;
+import it.uniba.app.campodagioco.Tavoliere;
 import it.uniba.app.utente.Giocatore;
 /**
  * <<BOUNDARY>>.
@@ -56,6 +57,13 @@ public final class Stampe {
      */
     public static void stampaPassaggioTurno() {
         System.out.println("Il giocatore non ha mosse possibili, il turno passa all'avversario");
+    }
+    /**
+     * Metodo che stampa messaggio quando la partita è finita in pareggio.
+     */
+    public static void stampaPartitaPareggiata(final Tavoliere tav) {
+        int pedine = tav.getPedine(0);
+        System.out.println("La partita è finita in pareggio: " + pedine + " a " + pedine);
     }
     /**
      * Metodo che stampa messaggio se il giocatore decide di non abbandonare.
@@ -123,5 +131,23 @@ public final class Stampe {
      */
     public static void stampaErroreComando() {
         System.out.println("comando non accettato");
+    }
+    /**
+     * Metodo che stampa il messaggio alla fine della partita.
+     * @param g Array di giocatori.
+     * @param tav tavoliere.
+     */
+    public static void stampaFinePartita(final Giocatore[] g, final Tavoliere tav) {
+        if (tav.getPedine(Tavoliere.PG1) + tav.getPedine(Tavoliere.PG2)
+            == Tavoliere.DIM_TAV * Tavoliere.DIM_TAV) {
+            System.out.println("Non ci sono più caselle disponibili");
+        }
+        if (tav.getPedine(Tavoliere.PG1) > tav.getPedine(Tavoliere.PG2)) {
+            System.out.println(g[Tavoliere.PG1].getNome() + " ha vinto "
+                + tav.getPedine(Tavoliere.PG1) + " a " + tav.getPedine(Tavoliere.PG2));
+        } else {
+            System.out.println(g[Tavoliere.PG2].getNome() + " ha vinto "
+            + tav.getPedine(Tavoliere.PG2) + " a " + tav.getPedine(Tavoliere.PG1));
+        }
     }
 }
