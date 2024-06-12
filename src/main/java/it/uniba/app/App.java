@@ -7,6 +7,7 @@ import it.uniba.app.campodagioco.Tavoliere;
 import java.util.Set;
 
 
+
 /**
  * Classe main dell'app.
  */
@@ -106,7 +107,7 @@ public final class App {
                     int[] mosse = Tastiera.separaInput(comando);
                     if (tav != null  && giocatori[turno].controllaMossa(tav, mosse, turno)) {
                         tav = giocatori[turno].mossaGiocatore(tav, mosse, turno);
-                        //conquista pedine
+                        tav = tav.conquistaPedine(mosse, turno);
                         turno = Comandi.altroGiocatore(turno);
                         Comandi.comandoTavoliere(partitaIniziata, tav);
                     }
